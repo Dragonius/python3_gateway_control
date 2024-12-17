@@ -1,6 +1,6 @@
 import argparse
 import miniupnpc
-from natpmp import NATPMPClient
+import nat-pmp
 
 def list_upnp_port_mappings():
     """Discovers UPnP devices and lists open ports."""
