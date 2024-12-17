@@ -50,14 +50,14 @@ def remove_upnp_mapping(protocol, external_port):
 
 def list_nat_pmp_port_mappings():
     """Lists NAT-PMP port mappings (limited information)."""
-    client = NATPMP()
+    client = natpmp()
     public_ip = client.publicaddress().publicip
     print(f"NAT-PMP Gateway Public IP: {public_ip}")
     print("NAT-PMP does not support full port listing; you must manually manage mappings.")
 
 def nat_pmp_forward(protocol, private_port, public_port, lifetime):
     """Adds a NAT-PMP port mapping."""
-    client = NATPMP()
+    client = natpmp()
     proto_code = 1 if protocol == "UDP" else 0
     response = client.addportmapping(proto_code, private_port, public_port, lifetime)
     print(f"NAT-PMP: Mapped port {public_port} -> {private_port}")
@@ -65,7 +65,7 @@ def nat_pmp_forward(protocol, private_port, public_port, lifetime):
 
 def nat_pmp_remove(protocol, private_port, public_port):
     """Removes a NAT-PMP port mapping."""
-    client = NATPMP()
+    client = natpmp()
     proto_code = 1 if protocol == "UDP" else 0
     client.addportmapping(proto_code, private_port, public_port, 0)
     print(f"NAT-PMP: Removed mapping for port {public_port}")
