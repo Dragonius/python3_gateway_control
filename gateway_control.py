@@ -11,7 +11,7 @@ def list_upnp_port_mappings():
     if num_devices == 0:
         print("No UPnP devices found. Ensure your router supports UPnP and it is enabled.")
         return
-    
+
     upnp.selectigd()
     print(f"Discovered UPnP device. External IP: {upnp.externalipaddress()}")
 
@@ -29,10 +29,10 @@ def upnp_port_forward(protocol, external_port, internal_port, internal_ip, descr
     upnp.discoverdelay = 200
     upnp.discover()
     upnp.selectigd()
-    
+
     print(f"External IP: {upnp.externalipaddress()}")
     print(f"Adding port forwarding: {protocol} {external_port} -> {internal_ip}:{internal_port}")
-    
+
     upnp.addportmapping(
         external_port, protocol, internal_ip, internal_port, description, ''
     )
@@ -43,21 +43,21 @@ def remove_upnp_mapping(protocol, external_port):
     upnp = miniupnpc.UPnP()
     upnp.discover()
     upnp.selectigd()
-    
+
     print(f"Removing port mapping: {protocol} {external_port}")
     upnp.deleteportmapping(external_port, protocol)
     print("Port mapping removed successfully!")
 
 def list_nat_pmp_port_mappings():
     """Lists NAT-PMP port mappings (limited information)."""
-    client = natpmp()
+    client = NATPMP()
     public_ip = client.publicaddress().publicip
     print(f"NAT-PMP Gateway Public IP: {public_ip}")
     print("NAT-PMP does not support full port listing; you must manually manage mappings.")
 
 def nat_pmp_forward(protocol, private_port, public_port, lifetime):
     """Adds a NAT-PMP port mapping."""
-    client = natpmp()
+    client = NATPMP()
     proto_code = 1 if protocol == "UDP" else 0
     response = client.addportmapping(proto_code, private_port, public_port, lifetime)
     print(f"NAT-PMP: Mapped port {public_port} -> {private_port}")
@@ -65,7 +65,7 @@ def nat_pmp_forward(protocol, private_port, public_port, lifetime):
 
 def nat_pmp_remove(protocol, private_port, public_port):
     """Removes a NAT-PMP port mapping."""
-    client = natpmp()
+    client = NATPMP()
     proto_code = 1 if protocol == "UDP" else 0
     client.addportmapping(proto_code, private_port, public_port, 0)
     print(f"NAT-PMP: Removed mapping for port {public_port}")
@@ -112,4 +112,3 @@ if __name__ == "__main__":
                 print("Missing external port for NAT-PMP removal.")
             else:
                 nat_pmp_remove(args.protocol, args.internal_port, args.external_port)
-
