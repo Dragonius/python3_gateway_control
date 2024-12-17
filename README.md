@@ -3,11 +3,11 @@
 This Python script provides a command-line tool for managing port forwarding on network gateways via UPnP and NAT-PMP protocols. It allows users to discover devices, list existing port mappings, and add or remove port forwarding rules with ease.
 
 ## Features
-Supports both UPnP (Universal Plug and Play) and NAT-PMP (NAT Port Mapping Protocol).
-Discover UPnP and NAT-PMP-enabled devices on the network.
-List all existing UPnP port mappings and NAT-PMP public IP.
-Add and remove port forwarding rules for both protocols.
-Configurable options for protocol, port numbers, description, and lifetime.
+Supports both UPnP (Universal Plug and Play) and NAT-PMP (NAT Port Mapping Protocol).<br/>
+Discover UPnP and NAT-PMP-enabled devices on the network.<br/>
+List all existing UPnP port mappings and NAT-PMP public IP.<br/>
+Add and remove port forwarding rules for both protocols.<br/>
+Configurable options for protocol, port numbers, description, and lifetime.<br/>
 
 ## Requirements
 Python 3.7 or later
